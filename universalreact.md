@@ -694,10 +694,40 @@ ReactDOM.render(
 
 # Deep Breath
 
+[These slides and all the demos are on GitHub](https://github.com/jackfranklin/universal-react-talk).
+
+Please send me questions: @Jack_Franklin or jack@pusher.com.
+
 ---
 
+# Universal JavaScript is here to stay.
 
+The techniques, libraries and approaches will change over time.
 
+There's plenty to figure out in this space!
 
+---
 
+# Server side by default?
 
+---
+
+# Further Reading
+
+- [Universal React on 24ways](https://24ways.org/2015/universal-react/)
+- [How we built the new gocardless.com](https://gocardless.com/blog/how-we-built-the-new-gocardless.com/)
+- [GoCardless.com repo](https://github.com/gocardless/splash-pages)
+- [Universal React Example app](https://github.com/jackfranklin/universal-react-example)
+
+---
+
+# If you dig React
+
+I can make you dig it more! Day long React workshops in London:
+
+- [16 March](http://www.whiteoctoberevents.co.uk/event/reactjs-workshop-march-16/)
+- [10 June](http://www.whiteoctoberevents.co.uk/event/reactjs-workshop-june-16/)
+
+---
+
+# Thanks! @Jack_Franklin
