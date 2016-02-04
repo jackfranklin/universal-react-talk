@@ -53,6 +53,16 @@
 
 ---
 
+# Cutting Edge!
+
+We're really still at the early stages of figuring out how this stuff works.
+
+Some of the code shown here isn't the easiest, or the APIs aren't that straight forward.
+
+This will change as we learn more. Don't expect this to be 100% smooth!
+
+---
+
 A standard React app:
 
 ```javascript
@@ -128,6 +138,12 @@ When your HTML is never going to be edited by client-side React
 - A server rendering step (like we just saw)
 - A client rendering step
 - A bundler to generate our client side JavaScript
+
+---
+
+# There's no requirement to actually go client side
+
+A server side generated React app with no client side JS is perfectly fine ;)
 
 ---
 
@@ -560,10 +576,128 @@ And then rerun `webpack`.
 
 No one has quite figured out the best way to deal with loading data on the server and client with React components.
 
-But I'm a fan of [Async Props](https://github.com/rackt/async-props) (also by the creator's of React Router).
-
-Warning: Async Props is not production ready yet.
+This is very, very new terrirory and things are not settled yet. This will get a little messy!
 
 ---
+
+I'm a fan of [Async Props](https://github.com/rackt/async-props) (also by the creator's of React Router).
+
+Warning: Async Props is not production ready yet, but I like the approach enough to consider it safe to demo.
+
+```
+npm install --save async-props
+```
+
+---
+
+# Caveat 2: Async-Props and React Router 2 don't play 100% nicely
+
+So for this demo I've downgraded to React Router 1.
+
+---
+
+
+Going to use the `fetch` API, so need a polyfill:
+
+```
+npm install --save isomorphic-fetch
+```
+
+---
+
+AsyncProps expects a `loadProps` static method in your Read component that loads the data. All we need to do is define it, and `AsyncProps` will take care of the rest.
+
+We can then refer to that data on `this.props` without worrying about if it's loaded or not, because AsyncProps ensures that it is.
+
+---
+
+First, let's give __components/index.js__ some data:
+
+```javascript
+export default class IndexComponent extends React.Component {
+  // a stage 1 proposal for ES.next
+  static loadProps(params, cb) {
+    fetch('https://api.github.com/users/jackfranklin').then((data) => {
+      return data.json();
+    }).then((github) => {
+      cb(null, { github });
+    }).catch((e) => {
+      cb(e);
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <p>My github repo count: { this.props.github.public_repos }</p>
+      </div>
+    );
+  }
+}
+```
+
+---
+
+Then we update our server rendering:
+
+```js
+// within the `match` callback:
+} else if (renderProps) {
+  // loadPropsonServer is provided by async-props
+  loadPropsOnServer(renderProps, (err, asyncProps, scriptTag) => {
+    res.render('index', {
+      // we now render AsyncProps
+      markup: renderToString(<AsyncProps {...renderProps} {...asyncProps} />),
+      scriptTag
+    });
+  });
+}
+```
+
+---
+
+- `loadPropsOnServer` gives us two items in the callback: `asyncProps` and `scriptTag`.
+- The `scriptTag` is needed to transfer the data from server to client.
+
+We change our `index.ejs` template:
+
+```html
+<div id="app"><%- markup %></div>
+<%- scriptTag %>
+<script src="build.js"></script>
+```
+
+---
+
+And finally we can update our client side rendering too:
+
+```javascript
+import AsyncProps from 'async-props';
+
+ReactDOM.render(
+  <Router
+    routes={routes}
+    history={createBrowserHistory()}
+    RoutingContext={AsyncProps}
+  />,
+  document.getElementById('app')
+)
+```
+
+(Note: this looks much nicer in React Router v2)
+
+---
+
+# Demo 4!
+
+---
+
+# Deep Breath
+
+---
+
+
+
+
 
 

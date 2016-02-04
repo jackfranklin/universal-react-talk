@@ -1,10 +1,12 @@
+import 'isomorphic-fetch';
 import express from 'express';
 import http from 'http';
 
 import { renderToString } from 'react-dom/server';
 import { routes } from './routes';
-import { match, RouterContext } from 'react-router';
+import { match, RoutingContext } from 'react-router';
 import React from 'react';
+import AsyncProps, { loadPropsOnServer } from 'async-props';
 
 const app = express();
 
@@ -19,8 +21,11 @@ app.get('*', (req, res) => {
     } else if (redirectLocation) {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search)
     } else if (renderProps) {
-      res.render('index', {
-        markup: renderToString(<RouterContext {...renderProps} />)
+      loadPropsOnServer(renderProps, (err, asyncProps, scriptTag) => {
+        res.render('index', {
+          markup: renderToString(<AsyncProps {...renderProps} {...asyncProps} />),
+          scriptTag
+        });
       });
     } else {
       res.status(404).send('Not found')
