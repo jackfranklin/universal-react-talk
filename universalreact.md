@@ -731,3 +731,5 @@ I can make you dig it more! Day long React workshops in London:
 ---
 
 # Thanks! @Jack_Franklin
+
+http://speakerdeck.com/jackfranklin
