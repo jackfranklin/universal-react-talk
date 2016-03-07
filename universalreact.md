@@ -127,6 +127,21 @@ When your HTML is never going to be edited by client-side React
 
 ---
 
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My App</title>
+  </head>
+
+  <body>
+    <p data-reactid=".nbhys48o3k" data-react-checksum="-1312485142">Hello from React</p>
+  </body>
+</html>
+```
+
+---
+
 # Going Client side
 
 - Shared set of components that are environment agnostic
