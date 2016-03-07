@@ -71,7 +71,7 @@ This will change as we learn more. Don't expect this to be 100% smooth!
 
 ---
 
-Code and demos: github.com/jackfranklin/
+Code and demos: github.com/jackfranklin/universal-react-talk
 
 ---
 
@@ -138,7 +138,7 @@ When your HTML is never going to be edited by client-side React
 
 # There's no requirement to actually go client side
 
-A server side generated React app with no client side JS is perfectly fine ;)
+A server side generated React app with no client side JS is perfectly fine.
 
 ---
 
@@ -260,9 +260,7 @@ export default class MyApp extends React.Component {
 
 ---
 
-# Demo Two!
-
-(Contrived example incoming!)
+![fit](counter-demo.mov)
 
 ---
 
@@ -287,14 +285,6 @@ Most web apps still do a lot of rendering of data (from APIs, etc) and why would
 The defacto, practically standard routing solution for React.
 
 https://github.com/rackt/react-router
-
----
-
-# react-router 2.0.0-rc5
-
-We're living on the bleeding edge here!
-
-[React Router 2.0 upgrade guide](https://github.com/rackt/react-router/blob/master/upgrade-guides/v2.0.0.md)
 
 ---
 
@@ -557,13 +547,7 @@ And then rerun `webpack`.
 
 ---
 
-# Demo Three!
-
----
-
-# Dealing with Data
-
-(If I have time...)
+# Dealing with Data on the server and client
 
 ---
 
@@ -575,28 +559,14 @@ This is very, very new terrirory and things are not settled yet. This will get a
 
 ---
 
-I'm a fan of [Async Props](https://github.com/rackt/async-props) (also by the creator's of React Router).
-
-Warning: Async Props is not production ready yet, but I like the approach enough to consider it safe to demo.
-
-```
-npm install --save async-props
-```
+1. We want to be able to fetch data on the server and/or on the client.
+2. If the data is loaded on the server and rendered to the client, we ideally want to avoid making the request again.
 
 ---
 
-# Caveat 2: Async-Props and React Router 2 don't play 100% nicely
+[Async Props](https://github.com/rackt/async-props) (also by the creator's of React Router).
 
-So for this demo I've downgraded to React Router 1.
-
----
-
-
-Going to use the `fetch` API, so need a polyfill:
-
-```
-npm install --save isomorphic-fetch
-```
+Not production ready, but a solution to the issue. Check `code/with-async-data` on GitHub for an example.
 
 ---
 
@@ -612,12 +582,8 @@ First, let's give __components/index.js__ some data:
 export default class IndexComponent extends React.Component {
   // a stage 1 proposal for ES.next
   static loadProps(params, cb) {
-    fetch('https://api.github.com/users/jackfranklin').then((data) => {
-      return data.json();
-    }).then((github) => {
-      cb(null, { github });
-    }).catch((e) => {
-      cb(e);
+    fetchGithubData('jackfranklin').then((data) => {
+      cb(null, { github: data });
     });
   }
 
@@ -633,61 +599,42 @@ export default class IndexComponent extends React.Component {
 
 ---
 
-Then we update our server rendering:
+Then we update our server and client rendering.
+
+`AsyncProps` generates a `script` that will contain the fetched data from the server.
+
+The client can pick this data up and avoid having to make the request all over again.
+
+---
+
+# This is one of many approaches.
+
+---
+
+[React Resolver](https://github.com/ericclemmons/react-resolver)
 
 ```js
-// within the `match` callback:
-} else if (renderProps) {
-  // loadPropsonServer is provided by async-props
-  loadPropsOnServer(renderProps, (err, asyncProps, scriptTag) => {
-    res.render('index', {
-      // we now render AsyncProps
-      markup: renderToString(<AsyncProps {...renderProps} {...asyncProps} />),
-      scriptTag
-    });
-  });
+import { resolve } from "react-resolver";
+
+@resolve("user", function(props) {
+  return http.get(`/api/users/${props.params.userId}`);
+})
+class UserProfile extends React.Component {
+  render() {
+    const { user } = this.props;
+    ...
+  }
 }
+
 ```
 
 ---
 
-- `loadPropsOnServer` gives us two items in the callback: `asyncProps` and `scriptTag`.
-- The `scriptTag` is needed to transfer the data from server to client.
-
-We change our `index.ejs` template:
-
-```html
-<div id="app"><%- markup %></div>
-<%- scriptTag %>
-<script src="build.js"></script>
-```
+This area is still being figured out - more solutions will definitely come!
 
 ---
 
-And finally we can update our client side rendering too:
-
-```javascript
-import AsyncProps from 'async-props';
-
-ReactDOM.render(
-  <Router
-    routes={routes}
-    history={createBrowserHistory()}
-    RoutingContext={AsyncProps}
-  />,
-  document.getElementById('app')
-)
-```
-
-(Note: this looks much nicer in React Router v2)
-
----
-
-# Demo 4!
-
----
-
-# Deep Breath
+# Code and Demos
 
 [These slides and all the demos are on GitHub](https://github.com/jackfranklin/universal-react-talk).
 
