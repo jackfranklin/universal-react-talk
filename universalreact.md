@@ -85,10 +85,7 @@ class MyApp extends React.Component {
   render() { ...  }
 }
 
-ReactDOM.renderToString(
-  <MyApp />,
-  document.getElementById('app')
-)
+ReactDOM.renderToString(<MyApp />)
 ```
 
 ---
