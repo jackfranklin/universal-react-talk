@@ -71,7 +71,7 @@ This will change as we learn more. Don't expect this to be 100% smooth!
 
 ---
 
-Code and demos: github.com/jackfranklin/universal-react-talk
+Code and demos: https://github.com/jackfranklin/universal-react-talk/tree/fluent-conf-version
 
 ---
 
