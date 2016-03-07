@@ -63,6 +63,18 @@ This will change as we learn more. Don't expect this to be 100% smooth!
 
 ---
 
+# React is a great fit
+
+---
+
+![fit](ember.png)
+
+---
+
+Code and demos: github.com/jackfranklin/
+
+---
+
 A standard React app:
 
 ```javascript
@@ -87,20 +99,6 @@ class MyApp extends React.Component {
 
 ReactDOM.renderToString(<MyApp />)
 ```
-
----
-
-# React is a great fit
-
----
-
-![fit](ember.png)
-
----
-
-# Demo One!
-
-Rendering HTML on the server from a React component
 
 ---
 
