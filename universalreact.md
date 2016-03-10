@@ -6,7 +6,11 @@
 
 --- 
 
-![fit](pusher_cloud.png)
+![inline](pusher_cloud.png)
+
+---
+
+![fit](batman.png)
 
 ---
 
@@ -53,7 +57,7 @@
 
 ---
 
-# Time and a place
+# Think about if this is right for you!
 
 ---
 
@@ -67,11 +71,15 @@ This will change as we learn more. Don't expect this to be 100% smooth!
 
 ---
 
-# React is a great fit
+# React paved the way
 
 ---
 
-![fit](ember.png)
+![fit](ember-cli.png)
+
+---
+
+![fit](angular.png)
 
 ---
 
@@ -179,9 +187,9 @@ Updating our server template.
 
 ```html
 <body>
-  <!-- rendering React into body is bad -->
-  <!-- lack of whitespace here is really important! -->
+  <!-- markup will be replaced with React generated HTML -->
   <div id="app"><%- markup %></div>
+  <!-- build.js is our client side bundle -->
   <script src="build.js"></script>
 </body>
 ```
@@ -212,7 +220,8 @@ ReactDOM.render(
 npm install --save-dev webpack \
   babel-loader \
   babel-preset-es2015 \
-  babel-preset-react
+  babel-preset-react \
+  babel-yet-another-thing-lol-jk
 ```
 
 ---
@@ -252,6 +261,8 @@ module.exports = {
 ---
 
 Run `webpack`:
+
+(PS: in production we'd minify, etc!)
 
 ```
 > webpack
@@ -717,4 +728,8 @@ I can make you dig it more! Day long React workshops in London:
 
 # Thanks! @Jack_Franklin
 
+javascriptplayground.com
+
 http://speakerdeck.com/jackfranklin
+
+jack@pusher.com
