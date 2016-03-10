@@ -6,6 +6,10 @@
 
 --- 
 
+![fit](pusher_cloud.png)
+
+---
+
 ![fit](gc.png)
 
 ---
@@ -628,20 +632,36 @@ The client can pick this data up and avoid having to make the request all over a
 
 [React Resolver](https://github.com/ericclemmons/react-resolver)
 
-```js
-import { resolve } from "react-resolver";
+__code/with-react-resolver__ has an example.
 
-@resolve("user", function(props) {
-  return http.get(`/api/users/${props.params.userId}`);
-})
-class UserProfile extends React.Component {
+```js
+class IndexComponent extends React.Component {
   render() {
-    const { user } = this.props;
-    ...
+    return (
+      <div>
+        <p>This is the index page</p>
+        <p>My github repo count: { this.props.github.public_repos }</p>
+      </div>
+    );
   }
 }
 
+export default resolve('github', (props) => {
+  return fetch('https://api.github.com/users/jackfranklin').then((data) => {
+    return data.json();
+  });
+})(IndexComponent);
 ```
+
+---
+
+- Update the server side rendering to include `window.__REACT_RESOLVER_PAYLOAD__`.
+- Update the client side rendering to use React Resolver.
+- All data is resolved on the server, rendered and then used to populate data on the client.
+
+---
+
+![fit](react-resolver.mov)
 
 ---
 
