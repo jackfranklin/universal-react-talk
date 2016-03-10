@@ -1,4 +1,4 @@
-# Universal React
+# Universal JavaScript
 
 ---
 
@@ -18,7 +18,12 @@
 
 ---
 
+![fit](react.png)
+
+---
+
 ![fit](24ways.png)
+
 
 ---
 
@@ -304,11 +309,7 @@ export default class MyApp extends React.Component {
 
 ---
 
-![fit](counter-demo.mov)
-
----
-
-Most web apps still do a lot of rendering of data (from APIs, etc) and why would you prevent your non-JS users from that?
+![fit autoplay loop](counter-demo.mov)
 
 ---
 
@@ -434,14 +435,13 @@ app.get('*', (req, res) => {
 
 ```javascript
 // take our app's routes, and the URL of the request
-match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
-  // match figures out which routes match, and calls this callback with the arguments above
+match({ routes, location: req.url },
+  (error, redirectLocation, renderProps) => {
+  // error: given if something went wrong matching a route
 
-  // error : given if something went wrong matching a route
+  // redirectLocation: returned if the URL matches a redirect
 
-  // redirectLocation : returned if the URL matches a redirect
-
-  // renderProps : given if a route was matched and we can render
+  // renderProps: given if a route was matched and we can render
   ...
 });
 ```
@@ -547,28 +547,25 @@ export const routes = (
 And some links...
 
 ```javascript
-import React from 'react';
-import { Link } from 'react-router';
-
-export default class AppComponent extends React.Component {
-  render() {
-    return (
-      <div>
-        <h2>My web 2.0 app</h2>
-        <Link to="/">Home</Link>
-        <Link to="/about">About</Link>
-        { this.props.children }
-      </div>
-    );
-  }
+...
+render() {
+  return (
+    <div>
+      <h2>My web 2.0 app</h2>
+      <Link to="/">Home</Link>
+      <Link to="/about">About</Link>
+      { this.props.children }
+    </div>
+  );
 }
+...
 ```
 
 ---
 
 With no client side bundle, this works perfectly:
 
-![inline](routing-demo.mov)
+![inline autoplay loop](routing-demo.mov)
 
 ---
 
@@ -591,15 +588,17 @@ And then rerun `webpack`.
 
 ---
 
+![fit autoplay loop](client-routing.mov)
+
+---
+
 # Dealing with Data on the server and client
 
 ---
 
 # (Caveat: this area is still WIP)
 
-No one has quite figured out the best way to deal with loading data on the server and client with React components.
-
-This is very, very new terrirory and things are not settled yet. This will get a little messy!
+Lots of unknowns!
 
 ---
 
@@ -680,7 +679,7 @@ export default resolve('github', (props) => {
 
 ---
 
-![fit](react-resolver.mov)
+![fit autoplay loop](react-resolver.mov)
 
 ---
 
@@ -692,6 +691,8 @@ This area is still being figured out - more solutions will definitely come!
 
 [These slides and all the demos are on GitHub](https://github.com/jackfranklin/universal-react-talk).
 
+__jackfranklin/universal-react-talk__
+
 Please send me questions: @Jack_Franklin or jack@pusher.com.
 
 ---
@@ -701,6 +702,8 @@ Please send me questions: @Jack_Franklin or jack@pusher.com.
 The techniques, libraries and approaches will change over time.
 
 There's plenty to figure out in this space!
+
+Long term I expect frameworks to do more, and it become even easier for developers to take advantage.
 
 ---
 
