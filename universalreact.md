@@ -209,7 +209,20 @@ ReactDOM.render(
 ---
 
 ```
-npm install --save-dev webpack babel-loader
+npm install --save-dev webpack \
+  babel-loader \
+  babel-preset-es2015 \
+  babel-preset-react
+```
+
+---
+
+Create __.babelrc__
+
+```json
+{
+  "presets": ["es2015", "react"]
+}
 ```
 
 ---
@@ -228,6 +241,7 @@ module.exports = {
     loaders: [
       {
         test: /.js$/,
+        exclude: /node_modules/,
         loader: 'babel'
       }
     ]
