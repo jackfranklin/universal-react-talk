@@ -585,13 +585,7 @@ This is very, very new terrirory and things are not settled yet. This will get a
 
 [Async Props](https://github.com/rackt/async-props) (also by the creator's of React Router).
 
-Not production ready, but a solution to the issue. Check `code/with-async-data` on GitHub for an example.
-
----
-
-AsyncProps expects a `loadProps` static method in your Read component that loads the data. All we need to do is define it, and `AsyncProps` will take care of the rest.
-
-We can then refer to that data on `this.props` without worrying about if it's loaded or not, because AsyncProps ensures that it is.
+Not production ready, still a WIP. Check `code/with-async-data` on GitHub for an example.
 
 ---
 
