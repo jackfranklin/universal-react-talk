@@ -10,10 +10,6 @@
 
 ---
 
-![fit](batman.png)
-
----
-
 ![fit](gc.png)
 
 ---
@@ -23,7 +19,6 @@
 ---
 
 ![fit](24ways.png)
-
 
 ---
 
@@ -62,6 +57,10 @@
 
 ---
 
+![fit](addy.png)
+
+---
+
 # Think about if this is right for you!
 
 ---
@@ -88,7 +87,7 @@ This will change as we learn more. Don't expect this to be 100% smooth!
 
 ---
 
-Code and demos: https://github.com/jackfranklin/universal-react-talk/tree/fluent-conf-version
+Code and demos: https://github.com/jackfranklin/universal-react-talk/tree/fel
 
 ---
 
@@ -116,6 +115,10 @@ class MyApp extends React.Component {
 
 ReactDOM.renderToString(<MyApp />)
 ```
+
+---
+
+# Tada!
 
 ---
 
@@ -168,19 +171,11 @@ When your HTML is never going to be edited by client-side React
 
 ---
 
-# There's no requirement to actually go client side
-
-A server side generated React app with no client side JS is perfectly fine.
-
----
-
 # Agnostic Components
 
 ---
 
 # Webpack
-
-A JavaScript application bundler that will generate our client side build.
 
 ---
 
@@ -317,13 +312,14 @@ export default class MyApp extends React.Component {
 
 ---
 
+# This isn't about giving every user 100% functionality every time.
+
+---
+
 # Routing
 
 ---
 
-# Don't be that person who breaks the web.
-
----
 
 # react-router
 
@@ -608,48 +604,10 @@ Lots of unknowns!
 
 ---
 
-[Async Props](https://github.com/rackt/async-props) (also by the creator's of React Router).
-
-Not production ready, still a WIP. Check `code/with-async-data` on GitHub for an example.
+# [React Resolver](https://github.com/ericclemmons/react-resolver)
 
 ---
 
-First, let's give __components/index.js__ some data:
-
-```javascript
-export default class IndexComponent extends React.Component {
-  // a stage 1 proposal for ES.next
-  static loadProps(params, cb) {
-    fetchGithubData('jackfranklin').then((data) => {
-      cb(null, { github: data });
-    });
-  }
-
-  render() {
-    return (
-      <div>
-        <p>My github repo count: { this.props.github.public_repos }</p>
-      </div>
-    );
-  }
-}
-```
-
----
-
-Then we update our server and client rendering.
-
-`AsyncProps` generates a `script` that will contain the fetched data from the server.
-
-The client can pick this data up and avoid having to make the request all over again.
-
----
-
-# This is one of many approaches.
-
----
-
-[React Resolver](https://github.com/ericclemmons/react-resolver)
 
 __code/with-react-resolver__ has an example.
 
