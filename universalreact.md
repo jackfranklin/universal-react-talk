@@ -481,9 +481,10 @@ if (error) {
 } else if (renderProps) {
   // if we have renderProps that means we have a match and can render
   res.render('index', {
-    // RouterContext is React Router's wrapper around our own components
+    // RouterContext is React Router's wrapper around our app
 
-    // and renderProps contains all the info React Router needs to render our app
+    // and renderProps contains all the info
+    // React Router needs to render our app
     markup: renderToString(<RouterContext {...renderProps} />)
   });
 } else {
