@@ -632,6 +632,49 @@ export default resolve('github', (props) => {
 
 ---
 
+Client:
+
+```js
+...
+import { Resolver } from 'react-resolver';
+
+Resolver.render(() => {
+  return <Router history={browserHistory} routes={routes} />
+}, document.getElementById('app'));
+```
+
+---
+
+Server:
+
+```js
+
+import { Resolver } from 'react-resolver';
+
+...
+
+Resolver
+  .resolve(() => <RouterContext {...renderProps} />)
+  .then(({ Resolved, data }) => {
+    res.render('index', {
+      markup: renderToString(<Resolved />),
+      data: JSON.stringify(data)
+    });
+  });
+```
+
+---
+
+Template:
+
+```html
+<div id="app"><%- markup %></div>
+<script>window.__REACT_RESOLVER_PAYLOAD__ = <%- data %></script>
+<script src="build.js"></script>
+```
+
+---
+
 - Update the server side rendering to include `window.__REACT_RESOLVER_PAYLOAD__`.
 - Update the client side rendering to use React Resolver.
 - All data is resolved on the server, rendered and then used to populate data on the client.
@@ -641,8 +684,6 @@ export default resolve('github', (props) => {
 ![fit autoplay loop](react-resolver.mov)
 
 ---
-
-This area is still being figured out - more solutions will definitely come!
 
 ---
 
@@ -681,9 +722,8 @@ Long term I expect frameworks to do more, and it become even easier for develope
 
 # If you dig React
 
-I can make you dig it more! Day long React workshops in London:
+I can make you dig it more! Day long React workshop in London:
 
-- [16 March](http://www.whiteoctoberevents.co.uk/event/reactjs-workshop-march-16/)
 - [10 June](http://www.whiteoctoberevents.co.uk/event/reactjs-workshop-june-16/)
 
 ---
