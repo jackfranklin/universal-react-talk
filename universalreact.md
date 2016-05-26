@@ -685,8 +685,6 @@ Template:
 
 ---
 
----
-
 # Code and Demos
 
 [These slides and all the demos are on GitHub](https://github.com/jackfranklin/universal-react-talk).
